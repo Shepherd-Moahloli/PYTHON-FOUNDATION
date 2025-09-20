@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Calculator - Python Foundation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .btn {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        margin: 5px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .results {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        display: none;
+      }
+
+      .results.show {
+        display: block;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .result-item {
+        margin: 10px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+        border-left: 4px solid #667eea;
+      }
+
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+        border-left-color: #dc3545;
+      }
+
+      .number-display {
+        font-family: "Courier New", monospace;
+        background: #e3f2fd;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 5px 0;
+      }
+
+      .examples {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+
+      .examples h4 {
+        margin-bottom: 10px;
+        color: #856404;
+      }
+
+      .example-btn {
+        background: #ffc107;
+        color: #212529;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 14px;
+      }
+
+      .example-btn:hover {
+        background: #e0a800;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🧮 Interactive Calculator</h1>
+        <p>Test your Python functions in real-time!</p>
+      </div>
+
+      <div class="card">
+        <h2>Number List Calculator</h2>
+        <p>
+          Enter a list of numbers separated by commas to see the
+          <code>calculate_sum()</code> function and list comprehension in
+          action.
+        </p>
+
+        <div class="examples">
+          <h4>📝 Try these examples:</h4>
+          <button class="example-btn" onclick="setExample('1,2,3,4,5')">
+            Basic: 1,2,3,4,5
+          </button>
+          <button class="example-btn" onclick="setExample('10,-5,3.14,0,7')">
+            Mixed: 10,-5,3.14,0,7
+          </button>
+          <button class="example-btn" onclick="setExample('100,200,300')">
+            Large: 100,200,300
+          </button>
+          <button class="example-btn" onclick="setExample('1.5,2.5,3.5')">
+            Decimals: 1.5,2.5,3.5
+          </button>
+        </div>
+
+        <div class="input-group">
+          <label for="numbers">Enter Numbers (comma-separated):</label>
+          <input
+            type="text"
+            id="numbers"
+            placeholder="e.g., 1,2,3,4,5"
+            value=""
+          />
+        </div>
+
+        <button class="btn" onclick="calculateNumbers()">🔢 Calculate</button>
+        <button class="btn btn-secondary" onclick="clearResults()">
+          🗑️ Clear
+        </button>
+
+        <div id="results" class="results">
+          <h3>📊 Results</h3>
+          <div id="result-content"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔍 How It Works</h3>
+        <p>
+          This calculator demonstrates the same Python concepts from your
+          foundation project:
+        </p>
+        <ul style="margin: 15px 0; padding-left: 30px">
+          <li>
+            <strong>Function Calls:</strong> Uses your
+            <code>calculate_sum()</code> function
+          </li>
+          <li>
+            <strong>List Comprehension:</strong> Squares each number with
+            <code>[x**2 for x in numbers]</code>
+          </li>
+          <li>
+            <strong>API Integration:</strong> Sends data to Flask backend via
+            AJAX
+          </li>
+          <li>
+            <strong>Error Handling:</strong> Validates input and handles errors
+            gracefully
+          </li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 30px">
+          <a href="/" class="btn">← Back to Home</a>
+          <a href="/demo" class="btn">View Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function setExample(numbers) {
+        document.getElementById("numbers").value = numbers;
+      }
+
+      function clearResults() {
+        document.getElementById("results").classList.remove("show");
+        document.getElementById("numbers").value = "";
+      }
+
+      async function calculateNumbers() {
+        const input = document.getElementById("numbers").value.trim();
+        const resultsDiv = document.getElementById("results");
+        const contentDiv = document.getElementById("result-content");
+
+        if (!input) {
+          showError("Please enter some numbers!");
+          return;
+        }
+
+        try {
+          // Parse input
+          const numberStrings = input.split(",");
+          const numbers = numberStrings.map((s) => {
+            const num = parseFloat(s.trim());
+            if (isNaN(num)) {
+              throw new Error(`"${s.trim()}" is not a valid number`);
+            }
+            return num;
+          });
+
+          // Send to API
+          const response = await fetch("/api/calculate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ numbers: numbers }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "Unknown error");
+          }
+
+          // Display results
+          contentDiv.innerHTML = `
+                    <div class="result-item">
+                        <h4>📝 Original Numbers (${data.count} items)</h4>
+                        <div class="number-display">${JSON.stringify(
+                          data.original_numbers
+                        )}</div>
+                    </div>
+                    <div class="result-item">
+                        <h4>➕ Sum Result</h4>
+                        <div class="number-display">${data.sum}</div>
+                        <small>Calculated using: calculate_sum(numbers)</small>
+                    </div>
+                    <div class="result-item">
+                        <h4>⚡ Squared Numbers</h4>
+                        <div class="number-display">${JSON.stringify(
+                          data.squared_numbers
+                        )}</div>
+                        <small>Generated using: [x**2 for x in numbers]</small>
+                    </div>
+                `;
+
+          resultsDiv.classList.add("show");
+        } catch (error) {
+          showError(error.message);
+        }
+      }
+
+      function showError(message) {
+        const resultsDiv = document.getElementById("results");
+        const contentDiv = document.getElementById("result-content");
+
+        contentDiv.innerHTML = `
+                <div class="result-item error">
+                    <h4>❌ Error</h4>
+                    <p>${message}</p>
+                </div>
+            `;
+
+        resultsDiv.classList.add("show");
+      }
+
+      // Allow Enter key to calculate
+      document
+        .getElementById("numbers")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            calculateNumbers();
+          }
+        });
+    </script>
+  </body>
+</html>

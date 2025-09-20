@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Foundation Web App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .feature h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 25px;
+        margin: 10px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .code-snippet {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+      }
+
+      .footer {
+        text-align: center;
+        color: white;
+        margin-top: 50px;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🐍 Python Foundation</h1>
+        <p>Learn Python fundamentals through interactive web demos</p>
+      </div>
+
+      <div class="card">
+        <h2>Welcome to Your Python Learning Journey!</h2>
+        <p>
+          This web application demonstrates the core concepts from your Python
+          foundation project. Explore different features to see Python in action
+          through your browser.
+        </p>
+
+        <div class="code-snippet">
+          <strong>Original Console Output:</strong><br />
+          Hello, World!<br />
+          Welcome to your new Python project!<br />
+          Original numbers: [1, 2, 3, 4, 5]<br />
+          Squared numbers: [1, 4, 9, 16, 25]<br />
+          Sum of numbers: 15
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="card feature">
+          <h3>📊 Interactive Demo</h3>
+          <p>
+            See the original Python code functionality in a beautiful web
+            interface.
+          </p>
+          <a href="/demo" class="btn">View Demo</a>
+        </div>
+
+        <div class="card feature">
+          <h3>🧮 Calculator</h3>
+          <p>
+            Interactive calculator that uses your Python functions with
+            real-time results.
+          </p>
+          <a href="/calculator" class="btn">Try Calculator</a>
+        </div>
+
+        <div class="card feature">
+          <h3>📚 Learning Features</h3>
+          <p>
+            • Function definitions and calls<br />
+            • List comprehensions<br />
+            • Mathematical operations<br />
+            • API endpoints<br />
+            • Modern web interface
+          </p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>Built with Flask • Python Foundation Project • 2025</p>
+      </div>
+    </div>
+  </body>
+</html>
